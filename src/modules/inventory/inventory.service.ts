@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException,Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { CreateInventoryItemDto } from './dto/create-inventory-item.dto';
 import { UpdateInventoryItemDto } from './dto/update-inventory-item.dto';
 import { InventoryItem } from './interfaces/inventory-item.interface';
@@ -11,6 +11,16 @@ export class InventoryService {
 
   async findAll(): Promise<InventoryItem[]> {
     return this.inventoryItemModel.find().exec();
+  }
+  
+  async find(id: string): Promise<InventoryItem> {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new HttpException('ID inválido', 400);
+    }
+    const item = await this.inventoryItemModel.findById(id).exec();
+    console.log(item);
+    if(!item) throw new HttpException('Page not found', 404);
+    return item;
   }
 
   async create(createInventoryItemDto: CreateInventoryItemDto): Promise<InventoryItem> {

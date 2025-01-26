@@ -5,8 +5,6 @@ export type FacultyDocument = HydratedDocument<Faculty>;
 
 @Schema()
 export class Faculty {
-  @Prop({ required: true, unique: true })
-  _id: string;
 
   @Prop({ required: true })
   name: string;

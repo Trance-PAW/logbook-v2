@@ -5,7 +5,7 @@ import { UpdateInventoryItemDto } from './dto/update-inventory-item.dto';
 import { InventoryItem } from './interfaces/inventory-item.interface';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @Controller('inventory')
 export class InventoryController {
   constructor(private readonly inventoryService: InventoryService) {}
@@ -13,6 +13,11 @@ export class InventoryController {
   @Get()
   findAll(): Promise<InventoryItem[]> {
     return this.inventoryService.findAll();
+  }
+
+  @Get(':id')
+  find(@Param('id') id: string): Promise<InventoryItem> {
+      return this.inventoryService.find(id);
   }
 
   @Post()
