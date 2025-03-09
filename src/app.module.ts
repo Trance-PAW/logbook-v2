@@ -13,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ssRegisterModule } from './modules/ssregister/ss.module';
 import { FacultyModule } from './modules/faculties/faculties.module';
 import { asRegisterModule } from './modules/assistanships/as.module';
+import { InventoryusageModule } from './modules/inventoryusage/inventoryusage.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { asRegisterModule } from './modules/assistanships/as.module';
     AuthModule,
     ssRegisterModule,
     FacultyModule,
-    asRegisterModule
+    asRegisterModule,
+    InventoryusageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
